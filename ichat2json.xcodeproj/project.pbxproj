@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		7AE34B8A1DFBA30600969CBE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AE34B891DFBA30500969CBE /* main.m */; };
+		7AE34B951DFBAB4800969CBE /* InstantMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AE34B941DFBAB4800969CBE /* InstantMessage.m */; };
+		7AE34B981DFBAD1C00969CBE /* StubCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AE34B971DFBAD1C00969CBE /* StubCoder.m */; };
+		7AE34B9B1DFBB54F00969CBE /* Sender.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AE34B9A1DFBB54F00969CBE /* Sender.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +28,12 @@
 /* Begin PBXFileReference section */
 		7AE34B861DFBA30500969CBE /* ichat2json */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ichat2json; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AE34B891DFBA30500969CBE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7AE34B931DFBAB4800969CBE /* InstantMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstantMessage.h; sourceTree = "<group>"; };
+		7AE34B941DFBAB4800969CBE /* InstantMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstantMessage.m; sourceTree = "<group>"; };
+		7AE34B961DFBAD1C00969CBE /* StubCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StubCoder.h; sourceTree = "<group>"; };
+		7AE34B971DFBAD1C00969CBE /* StubCoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StubCoder.m; sourceTree = "<group>"; };
+		7AE34B991DFBB54F00969CBE /* Sender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sender.h; sourceTree = "<group>"; };
+		7AE34B9A1DFBB54F00969CBE /* Sender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sender.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +66,13 @@
 		7AE34B881DFBA30500969CBE /* ichat2json */ = {
 			isa = PBXGroup;
 			children = (
+				7AE34B991DFBB54F00969CBE /* Sender.h */,
+				7AE34B9A1DFBB54F00969CBE /* Sender.m */,
+				7AE34B961DFBAD1C00969CBE /* StubCoder.h */,
+				7AE34B971DFBAD1C00969CBE /* StubCoder.m */,
 				7AE34B891DFBA30500969CBE /* main.m */,
+				7AE34B931DFBAB4800969CBE /* InstantMessage.h */,
+				7AE34B941DFBAB4800969CBE /* InstantMessage.m */,
 			);
 			path = ichat2json;
 			sourceTree = "<group>";
@@ -118,7 +133,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AE34B9B1DFBB54F00969CBE /* Sender.m in Sources */,
 				7AE34B8A1DFBA30600969CBE /* main.m in Sources */,
+				7AE34B951DFBAB4800969CBE /* InstantMessage.m in Sources */,
+				7AE34B981DFBAD1C00969CBE /* StubCoder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
