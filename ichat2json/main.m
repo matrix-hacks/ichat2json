@@ -18,13 +18,14 @@ int main(int argc, const char * argv[]) {
             fprintf(stderr, "Usage: %s path/to/ichat\n", argv[0]);
             exit(-1);
         }
-        
-        NSURL *f = [NSURL fileURLWithPath:[NSString stringWithUTF8String:argv[1]]];
+        NSString *filePath = [NSString stringWithUTF8String:argv[1]];
         [NSKeyedUnarchiver setClass:[InstantMessage class] forClassName:@"InstantMessage"];
         [NSKeyedUnarchiver setClass:[StubCoder class] forClassName:@"NSFont"];
         [NSKeyedUnarchiver setClass:[StubCoder class] forClassName:@"NSMutableParagraphStyle"];
+        [NSKeyedUnarchiver setClass:[StubCoder class] forClassName:@"NSTextAttachment"];
+        [NSKeyedUnarchiver setClass:[StubCoder class] forClassName:@"NSColor"];
         [NSKeyedUnarchiver setClass:[Sender class] forClassName:@"Presentity"];
-        for (id object in [NSKeyedUnarchiver unarchiveObjectWithFile: [f path]]) {
+        for (id object in [NSKeyedUnarchiver unarchiveObjectWithFile: filePath]) {
             if ([object isKindOfClass:[NSMutableArray class]]) {
                 for (id sub in object) {
                     if ([sub isKindOfClass:[InstantMessage class]]) {
