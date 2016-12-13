@@ -6,9 +6,9 @@
 //  Copyright © 2016 Keyvan Fatehi. All rights reserved.
 //
 
-#import "Sender.h"
+#import "Presentity.h"
 
-@implementation Sender
+@implementation Presentity
 
 @synthesize accountName = _accountName;
 

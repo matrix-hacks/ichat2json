@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Sender : NSObject <NSCoding /* Decoding only */>
+@interface Presentity : NSObject <NSCoding /* Decoding only */>
 
 @property (readonly, copy) NSString *accountName;
 

@@ -7,12 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Sender.h"
+#import "Presentity.h"
 
 @interface InstantMessage : NSObject <NSCoding /* Decoding only */>
 
 @property (readonly, copy) NSDate *date;
-@property (readonly, copy) NSAttributedString *message;
-@property (readonly, copy) Sender *sender;
+@property (readonly, copy) NSString *message;
+@property (readonly, copy) Presentity *sender;
+@property (readonly, copy) Presentity *subject;
 - (NSString *) toJSONString;
 @end

@@ -12,10 +12,11 @@
 {
     if (!(self = [super init]))
         return nil;
+
     _sender = [decoder decodeObjectForKey:@"Sender"];
+    _subject = [decoder decodeObjectForKey:@"Subject"];
     _date = [decoder decodeObjectForKey:@"Time"];
-    _message = [decoder decodeObjectForKey:@"MessageText"];
-    
+    _message = [decoder decodeObjectForKey:@"OriginalMessage"];
     return self;
 }
 
@@ -27,9 +28,12 @@
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS"];
     NSString *dateStr = [dateFormat stringFromDate:_date];
-    NSString *msg = [_message string];
-    NSString *senderName = [_sender accountName];
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:senderName, @"sender", msg, @"message", dateStr, @"date", nil];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                          [_sender accountName], @"sender",
+                          [_subject accountName], @"subject",
+                          _message, @"message",
+                          dateStr, @"date",
+                          nil];
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];
     NSString *jsonString;
