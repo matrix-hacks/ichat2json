@@ -11,12 +11,14 @@
 @implementation Presentity
 
 @synthesize accountName = _accountName;
+@synthesize serviceName = _serviceName;
 
 - (id)initWithCoder:(NSCoder *)decoder;
 {
     if (!(self = [super init]))
         return nil;
     _accountName = [decoder decodeObjectForKey:@"ID"];
+    _serviceName = [decoder decodeObjectForKey:@"ServiceName"];
     return self;
 }
 

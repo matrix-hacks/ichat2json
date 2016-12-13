@@ -31,6 +31,7 @@
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
                           [_sender accountName], @"sender",
                           [_subject accountName], @"subject",
+                          [_sender serviceName], @"service",
                           _message, @"message",
                           dateStr, @"date",
                           nil];
