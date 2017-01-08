@@ -1,2 +1,4 @@
 xcuserdata
-build
+ichat2json.xcodeproj/xcuserdata/keyvan.xcuserdatad/xcschemes/ichat2json.xcscheme
+build/ichat2json.build
+build/Release/ichat2json.dSYM
