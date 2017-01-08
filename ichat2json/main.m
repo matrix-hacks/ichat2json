@@ -30,16 +30,33 @@ int main(int argc, const char * argv[]) {
         NSData *data = [NSData dataWithContentsOfFile:filePath];
         NSKeyedUnarchiver* unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
         NSArray* root = [unarchiver decodeObjectForKey:@"$root"];
+        NSMutableArray *ims = [NSMutableArray array];
+        NSMutableSet *people = [NSMutableSet set];
         for (id object in root) {
             if ([object isKindOfClass:[NSMutableArray class]]) {
                 for (id sub in object) {
                     if ([sub isKindOfClass:[InstantMessage class]]) {
-                        InstantMessage *im = (InstantMessage *) sub;                        
-                        fprintf(stdout, "%s\n", [[im toJSONString] UTF8String]);
+                        InstantMessage *im = (InstantMessage *) sub;
+                        if ([im subject] != nil)
+                            [people addObject:im.subject.accountName];
+                        if ([im sender] != nil)
+                            [people addObject:im.sender.accountName];
+                        [ims addObject:im];
+                    }
+                    if ([sub isKindOfClass:[Presentity class]]) {
+                        Presentity *prs = (Presentity *) sub;
+                        [people addObject:prs.accountName];
                     }
                 }
             }
         }
+        for (InstantMessage* im in ims){
+            if ([people count] > 2) {
+                [im setIsMultiParty:true];
+            }
+            fprintf(stdout, "%s\n", [[im toJSONString] UTF8String]);
+        }
+
     }
     return 0;
 }

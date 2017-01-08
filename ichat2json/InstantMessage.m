@@ -17,17 +17,32 @@
     _subject = [decoder decodeObjectForKey:@"Subject"];
     _date = [decoder decodeObjectForKey:@"Time"];
     _message = [decoder decodeObjectForKey:@"OriginalMessage"];
+    _files = [[NSMutableArray alloc] init];
+    _isMultiParty = false;
     NSAttributedString *attrMsg = [decoder decodeObjectForKey:@"MessageText"];
-
-    _attachmentName = [self getAttributeWithKey:@"__kIMFilenameAttributeName" fromAttributedString:attrMsg];
-    _attachmentGUID = [self getAttributeWithKey:@"__kIMFileTransferGUIDAttributeName" fromAttributedString:attrMsg];
+    NSArray *fileIds = [self getAttributesWithKey:@"__kIMFilenameAttributeName" fromAttributedString:attrMsg];
+    NSArray *fileNames = [self getAttributesWithKey:@"__kIMFileTransferGUIDAttributeName" fromAttributedString:attrMsg];
+    [fileIds enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSString *fileId = [fileIds objectAtIndex:idx];
+        NSString *fileName = [fileNames objectAtIndex:idx];
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:fileId, @"id", fileName, @"name", nil];
+        [_files addObject:dict];
+    }];
     return self;
 }
 
-- (NSString *) getAttributeWithKey: (NSString *)attrKey fromAttributedString:(NSAttributedString *)attrStr
+- (NSArray *) getAttributesWithKey: (NSString *)attrKey fromAttributedString:(NSAttributedString *)attrStr
 {
     NSRange effectiveRange = NSMakeRange(0, 0);
-    return [attrStr attribute:attrKey atIndex:NSMaxRange(effectiveRange) effectiveRange:&effectiveRange];
+    NSMutableArray *mArray = [NSMutableArray array];
+    id value;
+    while (NSMaxRange(effectiveRange) < [attrStr length]) {
+        value = [attrStr attribute:attrKey atIndex:NSMaxRange(effectiveRange) effectiveRange:&effectiveRange];
+        if (value != nil) {
+            [mArray addObject:value];
+        }
+    }
+    return [mArray copy];
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder;
@@ -38,16 +53,14 @@
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS"];
     NSString *dateStr = [dateFormat stringFromDate:_date];
-    bool isMultiParty = _subject == nil; // multi party chats lack a "subject"
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
                           [_sender accountName], @"sender",
                           [_sender serviceName], @"service",
                           _message == nil ? [NSNull null] : _message, @"message",
                           dateStr, @"date",
-                          [NSNumber numberWithBool:isMultiParty], @"isMultiParty",
-                          isMultiParty ? [NSNull null] : [_subject accountName], @"subject",
-                          _attachmentName, @"attachmentName",
-                          _attachmentGUID, @"attachmentGUID",
+                          [NSNumber numberWithBool:_isMultiParty], @"isMultiParty",
+                          _subject ? [_subject accountName] : [NSNull null], @"subject",
+                          _files, @"files",
                           nil];
 
     NSError *error;
