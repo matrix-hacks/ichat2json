@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A2C847A1E22084100DBB279 /* StubCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2C84791E22084100DBB279 /* StubCoder.m */; };
 		7AE34B8A1DFBA30600969CBE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AE34B891DFBA30500969CBE /* main.m */; };
 		7AE34B951DFBAB4800969CBE /* InstantMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AE34B941DFBAB4800969CBE /* InstantMessage.m */; };
 		7AE34B9B1DFBB54F00969CBE /* Presentity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AE34B9A1DFBB54F00969CBE /* Presentity.m */; };
@@ -25,6 +26,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7A2C84781E22084100DBB279 /* StubCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StubCoder.h; sourceTree = "<group>"; };
+		7A2C84791E22084100DBB279 /* StubCoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StubCoder.m; sourceTree = "<group>"; };
 		7AE34B861DFBA30500969CBE /* ichat2json */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ichat2json; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AE34B891DFBA30500969CBE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7AE34B931DFBAB4800969CBE /* InstantMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstantMessage.h; sourceTree = "<group>"; };
@@ -63,6 +66,8 @@
 		7AE34B881DFBA30500969CBE /* ichat2json */ = {
 			isa = PBXGroup;
 			children = (
+				7A2C84781E22084100DBB279 /* StubCoder.h */,
+				7A2C84791E22084100DBB279 /* StubCoder.m */,
 				7AE34B991DFBB54F00969CBE /* Presentity.h */,
 				7AE34B9A1DFBB54F00969CBE /* Presentity.m */,
 				7AE34B891DFBA30500969CBE /* main.m */,
@@ -129,6 +134,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AE34B9B1DFBB54F00969CBE /* Presentity.m in Sources */,
+				7A2C847A1E22084100DBB279 /* StubCoder.m in Sources */,
 				7AE34B8A1DFBA30600969CBE /* main.m in Sources */,
 				7AE34B951DFBAB4800969CBE /* InstantMessage.m in Sources */,
 			);

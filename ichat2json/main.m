@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "InstantMessage.h"
 #import "Presentity.h"
+#import "StubCoder.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
@@ -20,6 +21,12 @@ int main(int argc, const char * argv[]) {
         NSString *filePath = [NSString stringWithUTF8String:argv[1]];
         [NSKeyedUnarchiver setClass:[InstantMessage class] forClassName:@"InstantMessage"];
         [NSKeyedUnarchiver setClass:[Presentity class] forClassName:@"Presentity"];
+        
+        [NSKeyedUnarchiver setClass:[StubCoder class] forClassName:@"NSFont"];
+        [NSKeyedUnarchiver setClass:[StubCoder class] forClassName:@"NSMutableParagraphStyle"];
+        [NSKeyedUnarchiver setClass:[StubCoder class] forClassName:@"NSTextAttachment"];
+        [NSKeyedUnarchiver setClass:[StubCoder class] forClassName:@"NSColor"];
+
         NSData *data = [NSData dataWithContentsOfFile:filePath];
         NSKeyedUnarchiver* unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
         NSArray* root = [unarchiver decodeObjectForKey:@"$root"];
@@ -27,7 +34,7 @@ int main(int argc, const char * argv[]) {
             if ([object isKindOfClass:[NSMutableArray class]]) {
                 for (id sub in object) {
                     if ([sub isKindOfClass:[InstantMessage class]]) {
-                        InstantMessage *im = (InstantMessage *) sub;
+                        InstantMessage *im = (InstantMessage *) sub;                        
                         fprintf(stdout, "%s\n", [[im toJSONString] UTF8String]);
                     }
                 }

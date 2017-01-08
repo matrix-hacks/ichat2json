@@ -17,7 +17,17 @@
     _subject = [decoder decodeObjectForKey:@"Subject"];
     _date = [decoder decodeObjectForKey:@"Time"];
     _message = [decoder decodeObjectForKey:@"OriginalMessage"];
+    NSAttributedString *attrMsg = [decoder decodeObjectForKey:@"MessageText"];
+
+    _attachmentName = [self getAttributeWithKey:@"__kIMFilenameAttributeName" fromAttributedString:attrMsg];
+    _attachmentGUID = [self getAttributeWithKey:@"__kIMFileTransferGUIDAttributeName" fromAttributedString:attrMsg];
     return self;
+}
+
+- (NSString *) getAttributeWithKey: (NSString *)attrKey fromAttributedString:(NSAttributedString *)attrStr
+{
+    NSRange effectiveRange = NSMakeRange(0, 0);
+    return [attrStr attribute:attrKey atIndex:NSMaxRange(effectiveRange) effectiveRange:&effectiveRange];
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder;
@@ -28,13 +38,18 @@
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS"];
     NSString *dateStr = [dateFormat stringFromDate:_date];
+    bool isMultiParty = _subject == nil; // multi party chats lack a "subject"
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
                           [_sender accountName], @"sender",
-                          [_subject accountName], @"subject",
                           [_sender serviceName], @"service",
-                          _message, @"message",
+                          _message == nil ? [NSNull null] : _message, @"message",
                           dateStr, @"date",
+                          [NSNumber numberWithBool:isMultiParty], @"isMultiParty",
+                          isMultiParty ? [NSNull null] : [_subject accountName], @"subject",
+                          _attachmentName, @"attachmentName",
+                          _attachmentGUID, @"attachmentGUID",
                           nil];
+
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];
     NSString *jsonString;
