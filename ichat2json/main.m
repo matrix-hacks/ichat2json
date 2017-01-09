@@ -54,6 +54,8 @@ int main(int argc, const char * argv[]) {
             if ([people count] > 2) {
                 [im setIsMultiParty:true];
             }
+            [im setParticipantIds:people];
+            [im setChatId: [root lastObject]];
             fprintf(stdout, "%s\n", [[im toJSONString] UTF8String]);
         }
 

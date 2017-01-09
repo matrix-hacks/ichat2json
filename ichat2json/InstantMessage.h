@@ -15,6 +15,8 @@
 @property (readonly, copy) NSString *message;
 @property (readonly, copy) NSMutableArray *files;
 @property () BOOL isMultiParty;
+@property () NSSet *participantIds;
+@property () NSString *chatId;
 @property (readonly, copy) Presentity *sender;
 @property (readonly, copy) Presentity *subject;
 - (NSString *) toJSONString;

@@ -60,6 +60,8 @@
                           dateStr, @"date",
                           [NSNumber numberWithBool:_isMultiParty], @"isMultiParty",
                           _subject ? [_subject accountName] : [NSNull null], @"subject",
+                          [_participantIds allObjects], @"participantIds",
+                          _chatId, @"chatId",
                           _files, @"files",
                           nil];
 
