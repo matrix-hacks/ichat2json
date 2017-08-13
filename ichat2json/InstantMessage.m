@@ -19,6 +19,7 @@
     _message = [decoder decodeObjectForKey:@"OriginalMessage"];
     _files = [[NSMutableArray alloc] init];
     _isMultiParty = false;
+    _isRead = [(NSNumber*)[decoder decodeObjectForKey:@"IsRead"] integerValue] == 1 ? true : false;
     NSAttributedString *attrMsg = [decoder decodeObjectForKey:@"MessageText"];
     NSArray *fileIds = [self getAttributesWithKey:@"__kIMFilenameAttributeName" fromAttributedString:attrMsg];
     NSArray *fileNames = [self getAttributesWithKey:@"__kIMFileTransferGUIDAttributeName" fromAttributedString:attrMsg];
@@ -59,6 +60,7 @@
                           _message == nil ? [NSNull null] : _message, @"message",
                           dateStr, @"date",
                           [NSNumber numberWithBool:_isMultiParty], @"isMultiParty",
+                          [NSNumber numberWithBool:_isRead], @"isRead",
                           _subject ? [_subject accountName] : [NSNull null], @"subject",
                           [_participantIds allObjects], @"participantIds",
                           _chatId, @"chatId",
