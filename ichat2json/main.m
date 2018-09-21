@@ -33,7 +33,7 @@ int main(int argc, const char * argv[]) {
         NSMutableArray *ims = [NSMutableArray array];
         NSMutableSet *people = [NSMutableSet set];
         for (id object in root) {
-            if ([object isKindOfClass:[NSMutableArray class]]) {
+            if ([object isKindOfClass:[NSArray class]]) {
                 for (id sub in object) {
                     if ([sub isKindOfClass:[InstantMessage class]]) {
                         InstantMessage *im = (InstantMessage *) sub;
